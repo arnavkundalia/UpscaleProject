@@ -83,7 +83,7 @@ def parse_options(root_path, is_train=True):
     parser = argparse.ArgumentParser()
     parser.add_argument('-opt', type=str, default= "HAT\\options\\test\\HAT_GAN_Real_SRx4.yml", help='Path to option YAML file.')
     parser.add_argument('--input',type=str,required=True)
-    parser.add_argument('--out',default="result_images\\",type=str)
+    parser.add_argument('--out',required=True,type=str)
     parser.add_argument('--launcher', choices=['none', 'pytorch', 'slurm'], default='none', help='job launcher')
     parser.add_argument('--auto_resume', action='store_true')
     parser.add_argument('--debug', action='store_true')

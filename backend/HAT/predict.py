@@ -30,11 +30,11 @@ class Predictor(BasePredictor):
                     "python",
                     "hat/test.py",
                     "-opt",
-                    "options/test/HAT_GAN_Real_SRx4.yml",
+                    "options/test/HAT_SRx4_ImageNet-LR.yml",
                 ]
             )
             res_dir = os.path.join(
-                "results", "images"
+                "results", "HAT_SRx4_ImageNet-LR", "images"
             )
             assert (
                 len(os.listdir(res_dir)) == 1
