@@ -37,4 +37,4 @@ def upload_image(request):
             return response
     else:
         form = ImageUploadForm()
-    return render(request, 'upload_image.html', {'form': form})
+    # return render(request, 'upload_image.html', {'form': form})
