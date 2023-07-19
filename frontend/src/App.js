@@ -5,6 +5,40 @@ import axios from 'axios';
 import './App.css'
 
 
+
+
+
+/*
+
+
+fetch("http://localhost:8000/api/input_images/10/", {
+  "headers": {
+    "accept": "text/html; q=1.0, *",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "sec-ch-ua": "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "x-csrftoken": "vU4avToDSWDz3oF8YZdklc4pItAb9s8g8ijUGuoagAc3Dqi11QcM8U3tx689aWhT",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "referrer": "http://localhost:8000/api/input_images/10/",
+  "referrerPolicy": "same-origin",
+  "body": null,
+  "method": "DELETE",
+  "mode": "cors",
+  "credentials": "include"
+});
+
+
+
+*/
+
+
+
 // create a class that extends the component
 
 const App = () => {
@@ -68,6 +102,7 @@ const App = () => {
 
       axios.post(url, formData, config)
         .then((res) => {
+          refreshList();
           console.log(res.data);
           alert("File uploaded successfully");
         })
@@ -83,16 +118,20 @@ const App = () => {
 
   // // Delete item
   const onDelete = (item) => {
-    if(!deletePermission){
-      return;
-    }
+    // if(!deletePermission){
+    //   return;
+    // }
 
     let formData = new FormData();
     formData.append('input_image', item);
     const url = `http://localhost:8000/api/input_images/${item.id}/`;
-
+    const config = {
+      headers: {'content-type': 'application/x-www-form-urlencoded'}
+    }
+    
     alert("Deleting" + JSON.stringify(item));
-    axios.delete(url, item)
+
+    axios.delete(url, formData, config)
     .then((res) => refreshList())
     .catch(err => {
       console.log(err);
@@ -134,7 +173,8 @@ const App = () => {
                       </button>
                       <button
                       onClick={() => 
-                        <DeletingModal itemToDelete={item} deletingPermission = {setDeletePermission} deletingFunc = {onDelete}/>
+                        // <DeletingModal itemToDelete={item} deletingPermission = {setDeletePermission} deletingFunc = {onDelete}/>
+                        onDelete(item)
                       }
                       className="btn btn-danger"
                       style={{margin: "2px"}}
